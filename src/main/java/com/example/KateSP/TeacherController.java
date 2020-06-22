@@ -3,6 +3,8 @@ package com.example.KateSP;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Set;
+
 @RestController
 public class TeacherController {
 
@@ -28,5 +30,10 @@ public class TeacherController {
     @DeleteMapping("/teacher")
     public String deleteTeacher(@RequestParam(value = "id") String id) {
         return teacherService.deleteTeacher(Integer.valueOf(id));
+    }
+
+    @GetMapping("/teachers/grade")
+    public Set<TeacherEntity> getTeachersByGradeId(@RequestParam(value = "grade_id") String gradeId) {
+        return teacherService.getTeachersByGradeId(Integer.valueOf(gradeId));
     }
 }
