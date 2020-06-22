@@ -5,21 +5,16 @@ import javax.persistence.*;
 @Entity
 @Table(name = "teacher")
 public class TeacherEntity {
-    @Override
-    public String toString() {
-        return "TeacherEntity{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", gradeId=" + gradeId +
-                '}';
-    }
 
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     private Integer id;
+
     private String name;
-    @Column(name = "grade_id")
-    private Integer gradeId;
+
+    @ManyToOne
+    @JoinColumn(name="grade_id", nullable=false)
+    private GradeEntity grade;
 
     public Integer getId() {
         return id;
@@ -37,11 +32,20 @@ public class TeacherEntity {
         this.name = name;
     }
 
-    public Integer getGradeId() {
-        return gradeId;
+    public GradeEntity getGrade() {
+        return grade;
     }
 
-    public void setGradeId(Integer gradeId) {
-        this.gradeId = gradeId;
+    public void setGrade(GradeEntity gradeEntity) {
+        this.grade = gradeEntity;
+    }
+
+    @Override
+    public String toString() {
+        return "TeacherEntity{" +
+                "id=" + id +
+                ", name='" + name +
+                ", grade=" + grade.toString() +
+                '}';
     }
 }

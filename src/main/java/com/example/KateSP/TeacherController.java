@@ -10,8 +10,9 @@ public class TeacherController {
     private TeacherService teacherService;
 
     @GetMapping("/teacher")
-    public TeacherEntity getTeacher(@RequestParam(value = "id") String id) {
-        return teacherService.getById(Integer.valueOf(id));
+    public String getTeacher(@RequestParam(value = "id") String id) {
+        TeacherEntity entity = teacherService.getById(Integer.valueOf(id));
+        return entity.toString();
     }
 
     @PostMapping("/teacher")

@@ -9,6 +9,9 @@ public class TeacherService {
     @Autowired
     private TeacherRepository teacherRepository;
 
+    @Autowired
+    private GradeRepository gradeRepository;
+
     public TeacherEntity getById(int id) {
         return teacherRepository.findById(id);
     }
@@ -17,7 +20,7 @@ public class TeacherService {
     public TeacherEntity createTeacher(String name) {
         TeacherEntity result = new TeacherEntity();
         result.setName(name);
-        result.setGradeId(1);
+        result.setGrade(gradeRepository.findById(1));
         teacherRepository.save(result);
         return result;
     }
@@ -25,7 +28,7 @@ public class TeacherService {
     @Transactional
     public TeacherEntity updateTeachersGrade(Integer teacherId, Integer gradeId) {
         TeacherEntity teacherEntity = getById(teacherId);
-        teacherEntity.setGradeId(gradeId);
+        teacherEntity.setGrade(gradeRepository.findById(gradeId));
         TeacherEntity result = teacherRepository.update(teacherEntity);
         return result;
     }
